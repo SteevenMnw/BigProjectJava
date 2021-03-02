@@ -1,5 +1,6 @@
 package Java.Project.BigProject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,6 +21,7 @@ public class User {
     private Long id ;
 
     @OneToMany(mappedBy = "users")
+    @JsonIgnoreProperties("users")
     @ToString.Exclude
     private List<Image> images;
 

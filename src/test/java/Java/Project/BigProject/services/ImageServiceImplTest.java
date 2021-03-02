@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,34 +46,55 @@ class ImageServiceImplTest {
     void read() {
         Long id = 1L;
         Image image = service.read(id);
-        var lst = image.getCategories();
-        lst.forEach(f -> log.trace("{}",f));
-        log.trace("Number of Image for a Categorie :{}, {}",image,lst.size());
-        assertEquals(image.getId(),id);
-    }
-
-    @Test
-    void create(){
-        Long idu = 1L;
-        String ni = "TEST";
-        String di = "description TEST";
-        Long ci = 1L;
-        LocalDateTime datei = LocalDateTime.now();
-        Long li = 1L;
-        Image image = new Image();
-        image.setUsers(User.class.);
-        service.create(image);
-        log.trace("Create Categorie :{}",image);
+        log.trace("Information of one Image :{}",image);
         assertEquals(service.read(image.getId()).getName(),"Test");
     }
 
     @Test
-    void update(){
-        Categorie categorie = service.read(4L);
-        categorie.setName("Maison");
-        service.update(categorie);
-        log.trace("Update Categorie : {}", categorie);
-        assertEquals(categorie.getName(),"Maison");
+    void create(){
+        User user = new User();
+        Image image = new Image();
+        Categorie categorie = new Categorie();
+
+        user.setId(6L);
+        user.setName("TestCreateImageUser");
+        user.setSurname("TCIU");
+        user.setIdentifier("TestCIU");
+        user.setPassword("test");
+        user.setRole(0L);
+
+        categorie.setId(100L);
+        categorie.setName("TestCreateImageCategorie");
+        categorie.setImages(Collections.singletonList(image));
+
+        image.setUsers(user);
+        image.setName("TestCreateImage");
+        image.setDescription("DescriptionTestCreateImage");
+        image.setCopyright(1L);
+        image.setDate(LocalDateTime.now());
+        image.setState(1L);
+        image.setLink("TestCreateImage");
+        image.setCategories(Collections.singletonList(categorie));
+
+        service.create(image);
+        log.trace("Create Image :{}",image);
+        assertEquals(service.read(image.getId()).getName(),"TestCreateImage");
+    }
+
+    @Test
+    void update() {
+        Image image = service.read(6L);
+
+        image.setName("TestUpdateImage");
+        image.setDescription("DescriptionTestUpdateImage");
+        image.setCopyright(0L);
+        image.setDate(LocalDateTime.now());
+        image.setState(0L);
+        image.setLink("TestUpdateImage");
+
+        service.update(image);
+        log.trace("Update Image : {}", image);
+        assertEquals(service.read(image.getId()).getName(),"TestUpdateImage");
     }
 
     @Test

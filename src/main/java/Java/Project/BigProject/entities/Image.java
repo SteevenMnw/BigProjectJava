@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -36,7 +36,7 @@ public class Image {
     private String Name;
     private String Description;
     private Long Copyright;
-    private Date Date;
+    private LocalDateTime Date;
     private Long State;
     private String Link;
 }

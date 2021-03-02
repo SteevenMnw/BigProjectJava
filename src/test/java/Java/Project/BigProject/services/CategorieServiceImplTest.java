@@ -41,10 +41,8 @@ class CategorieServiceImplTest {
     void read() {
         Long id = 1L;
         Categorie categorie = service.read(id);
-        var lst = categorie.getImages();
-        lst.forEach(f -> log.trace("{}",f));
-        log.trace("Number of Image for a Categorie :{}, {}",categorie,lst.size());
-        assertEquals(categorie.getId(),id);
+        log.trace("Information of one Categorie :{}",categorie);
+        assertEquals(service.read(categorie.getId()).getName(),"Paysage");
     }
 
     @Test
@@ -63,7 +61,7 @@ class CategorieServiceImplTest {
         categorie.setName("Maison");
         service.update(categorie);
         log.trace("Update Categorie : {}", categorie);
-        assertEquals(categorie.getName(),"Maison");
+        assertEquals(service.read(categorie.getId()).getName(),"Maison");
     }
 
     @Test
