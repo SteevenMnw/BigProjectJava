@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -32,7 +30,6 @@ class CategorieServiceImplTest {
     void getAll() {
         var lst = service.getAll();
         lst.forEach(a -> log.trace("{}",a));
-        log.trace("Total number of Categorie :{}",lst.size());
         assertEquals(lst.size(),service.getAll().size());
     }
 
@@ -41,7 +38,6 @@ class CategorieServiceImplTest {
     void read() {
         Long id = 1L;
         Categorie categorie = service.read(id);
-        log.trace("Information of one Categorie :{}",categorie);
         assertEquals(service.read(categorie.getId()).getName(),"Paysage");
     }
 
@@ -51,7 +47,6 @@ class CategorieServiceImplTest {
         Categorie categorie = new Categorie();
         categorie.setName(nc);
         service.create(categorie);
-        log.trace("Create Categorie :{}",categorie);
         assertEquals(service.read(categorie.getId()).getName(),"Test");
     }
 
@@ -60,7 +55,6 @@ class CategorieServiceImplTest {
         Categorie categorie = service.read(4L);
         categorie.setName("Maison");
         service.update(categorie);
-        log.trace("Update Categorie : {}", categorie);
         assertEquals(service.read(categorie.getId()).getName(),"Maison");
     }
 

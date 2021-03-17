@@ -33,6 +33,10 @@ public class UserServiceImpl implements UserService{
         return repository.findById(id).orElse(null);
     }
 
+    public User findUserByIdentifierAndPassword(String identifier, String password) {
+        return repository.findUserByIdentifierEqualsAndPasswordEquals(identifier, password);
+    }
+
     @Override
     public User update(User user) {
         return repository.saveAndFlush(user);

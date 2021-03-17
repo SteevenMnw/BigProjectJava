@@ -20,9 +20,10 @@ public class Categorie {
     @Column(name = "id_cat")
     private Long id;
 
-    private String Name;
+    private String name;
 
     @ManyToMany(mappedBy = "categories")
     @JsonIgnoreProperties("categories")
+    @ToString.Exclude
     private List<Image> images;
 }

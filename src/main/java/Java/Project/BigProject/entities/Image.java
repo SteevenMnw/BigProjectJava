@@ -30,13 +30,14 @@ public class Image {
     @JoinTable(name="avoir",
             joinColumns={@JoinColumn(name="id_image")},
             inverseJoinColumns={@JoinColumn(name="id_cat")})
-    @JsonIgnoreProperties("Categories")
+    @JsonIgnoreProperties("images")
+    @ToString.Exclude
     private List<Categorie> categories;
 
-    private String Name;
-    private String Description;
-    private Long Copyright;
-    private LocalDateTime Date;
-    private Long State;
-    private String Link;
+    private String name;
+    private String description;
+    private Long copyright;
+    private LocalDateTime date;
+    private Long state;
+    private String link;
 }

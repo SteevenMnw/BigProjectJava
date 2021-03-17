@@ -25,9 +25,10 @@ public class User {
     @ToString.Exclude
     private List<Image> images;
 
-    private String Name;
-    private String Surname;
-    private String Identifier;
-    private String Password;
-    private Long Role;
+    private String name;
+    private String surname;
+    private String identifier;
+    private String password;
+    private String email;
+    private Long role;
 }

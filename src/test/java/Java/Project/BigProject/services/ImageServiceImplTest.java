@@ -36,17 +36,16 @@ class ImageServiceImplTest {
     @Test
     void getAll() {
         var lst = service.getAll();
-        lst.forEach(a -> log.trace("{}",a));
-        log.trace("Total number of Image :{}",lst.size());
+        lst.forEach(a -> log.trace("Image {}",a));
         assertEquals(lst.size(),service.getAll().size());
     }
 
     @Test
     @Transactional
     void read() {
-        Long id = 1L;
+        Long id = 7L;
         Image image = service.read(id);
-        log.trace("Information of one Image :{}",image);
+        log.trace("image {}",image);
         assertEquals(service.read(image.getId()).getName(),"Test");
     }
 
@@ -56,7 +55,7 @@ class ImageServiceImplTest {
         Image image = new Image();
         Categorie categorie = new Categorie();
 
-        user.setId(6L);
+        user.setId(1L);
         user.setName("TestCreateImageUser");
         user.setSurname("TCIU");
         user.setIdentifier("TestCIU");
@@ -77,13 +76,12 @@ class ImageServiceImplTest {
         image.setCategories(Collections.singletonList(categorie));
 
         service.create(image);
-        log.trace("Create Image :{}",image);
         assertEquals(service.read(image.getId()).getName(),"TestCreateImage");
     }
 
     @Test
     void update() {
-        Image image = service.read(6L);
+        Image image = service.read(7L);
 
         image.setName("TestUpdateImage");
         image.setDescription("DescriptionTestUpdateImage");
@@ -93,13 +91,12 @@ class ImageServiceImplTest {
         image.setLink("TestUpdateImage");
 
         service.update(image);
-        log.trace("Update Image : {}", image);
         assertEquals(service.read(image.getId()).getName(),"TestUpdateImage");
     }
 
     @Test
     void delete() {
-        service.delete(6L);
+        service.delete(8L);
         assertNull(service.read(6L));
     }
 }

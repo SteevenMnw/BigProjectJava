@@ -31,7 +31,6 @@ class UserServiceImplTest {
     void getAll() {
         var lst = service.getAll();
         lst.forEach(a -> log.trace("{}",a));
-        log.trace("Total number of User :{}",lst.size());
         assertEquals(lst.size(),service.getAll().size());
     }
 
@@ -40,7 +39,6 @@ class UserServiceImplTest {
     void read() {
         Long id = 1L;
         User user = service.read(id);
-        log.trace("Information of one User :{}",user);
         assertEquals(service.read(user.getId()).getName(),"Dupont");
     }
 
@@ -52,10 +50,10 @@ class UserServiceImplTest {
         user.setSurname("TestCreateUser");
         user.setIdentifier("TCU");
         user.setPassword("tcu");
+        user.setEmail("tcu@email.com");
         user.setRole(0L);
 
         service.create(user);
-        log.trace("Create User :{}",user);
         assertEquals(service.read(user.getId()).getName(),"TestCreateUser");
     }
 
@@ -67,11 +65,20 @@ class UserServiceImplTest {
         user.setSurname("TestUpdateUser");
         user.setIdentifier("TUU");
         user.setPassword("tuu");
+        user.setEmail("tuu@email.com");
         user.setRole(0L);
 
         service.update(user);
-        log.trace("Update User : {}", user);
         assertEquals(service.read(user.getId()).getName(),"TestUpdateUser");
+    }
+
+    @Test
+    void findByIdentifierEqualsAndPasswordEquals(){
+        String identifier = "admin";
+        String password = "admin";
+        User user = service.findUserByIdentifierAndPassword(identifier, password);
+        assertNotNull(user);
+        assertEquals(service.read(user.getId()).getId(), 2);
     }
 
     @Test
