@@ -29,7 +29,7 @@ class UserRepositoryTest {
         log.trace("Start findUserByIdentifierEqualsAndPasswordEquals");
         String identifier = "admin";
         String password = "admin";
-        var user = repository.findUserByIdentifierEqualsAndPasswordEquals(identifier, password);
+        var user = repository.findByEmailEqualsAndPasswordEquals(identifier, password);
         assertNotNull(user);
         assertEquals(repository.getOne(user.getId()).getId(), 2);
     }

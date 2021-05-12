@@ -1,6 +1,5 @@
 package Java.Project.BigProject.services;
 
-import Java.Project.BigProject.entities.Categorie;
 import Java.Project.BigProject.entities.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -73,17 +72,21 @@ class UserServiceImplTest {
     }
 
     @Test
-    void findByIdentifierEqualsAndPasswordEquals(){
-        String identifier = "admin";
-        String password = "admin";
-        User user = service.findUserByIdentifierAndPassword(identifier, password);
-        assertNotNull(user);
-        assertEquals(service.read(user.getId()).getId(), 2);
-    }
-
-    @Test
     void delete() {
         service.delete(5L);
         assertNull(service.read(5L));
+    }
+
+    @Test
+    void findUserByEmailAndPassword() {
+        String mail = "TestUpdate@gmail.com";
+        String password = "TestPassword";
+        User user = service.findUserByEmailAndPassword(mail, password);
+        log.trace("User : {}", user);
+    }
+
+    @Test
+    void addUser(){
+        service.addUser("test","test","test","test","test");
     }
 }

@@ -6,24 +6,23 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "categories")
-public class Categorie {
+@Table(name = "mot")
+public class Mot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cat")
-    private Long id;
+    @Column(name = "id_mot")
+    private Long id ;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "id_image")
+    @JsonIgnoreProperties("images")
+    private Image images;
 
-    @ManyToMany(mappedBy="categories")
-    @ToString.Exclude
-    @JsonIgnoreProperties("categories")
-    private List<Image> images;
+    private String libelle;
 }

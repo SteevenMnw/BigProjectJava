@@ -33,10 +33,6 @@ public class UserServiceImpl implements UserService{
         return repository.findById(id).orElse(null);
     }
 
-    public User findUserByIdentifierAndPassword(String identifier, String password) {
-        return repository.findUserByIdentifierEqualsAndPasswordEquals(identifier, password);
-    }
-
     @Override
     public User update(User user) {
         return repository.saveAndFlush(user);
@@ -45,5 +41,20 @@ public class UserServiceImpl implements UserService{
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public User findUserByEmailAndPassword(String mail, String password) {
+        return repository.findByEmailEqualsAndPasswordEquals(mail, password);
+    }
+
+    public void addUser(String name, String surname, String identifier, String password, String email){
+        User user = new User();
+        user.setName(name);
+        user.setSurname(surname);
+        user.setIdentifier(identifier);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setRole(0L);
+        create(user);
     }
 }

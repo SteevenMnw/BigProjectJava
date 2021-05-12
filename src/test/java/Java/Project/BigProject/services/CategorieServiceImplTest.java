@@ -63,4 +63,15 @@ class CategorieServiceImplTest {
         service.delete(4L);
         assertNull(service.read(4L));
     }
+
+    @Test
+    void addCategorie(){
+        service.addCategorie("test");
+    }
+
+    @Test
+    void getOneCategoryByName() {
+        String name = "Maison";
+        Categorie categorie = service.getOneCategoryByName(name);
+    }
 }

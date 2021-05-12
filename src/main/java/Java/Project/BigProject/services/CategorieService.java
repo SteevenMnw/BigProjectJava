@@ -11,4 +11,6 @@ public interface CategorieService {
     Categorie read(Long id);
     Categorie update(Categorie categorie);
     void delete(Long id);
+    void addCategorie(String name);
+    Categorie getOneCategoryByName(String name);
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collections;
@@ -67,10 +68,11 @@ class ImageServiceImplTest {
         categorie.setImages(Collections.singletonList(image));
 
         image.setUsers(user);
+        image.setTitle("test");
         image.setName("TestCreateImage");
         image.setDescription("DescriptionTestCreateImage");
         image.setCopyright(1L);
-        image.setDate(LocalDateTime.now());
+        image.setDate(LocalDate.now());
         image.setState(1L);
         image.setLink("TestCreateImage");
         image.setCategories(Collections.singletonList(categorie));
@@ -83,10 +85,11 @@ class ImageServiceImplTest {
     void update() {
         Image image = service.read(7L);
 
+        image.setTitle("testUpdateImage");
         image.setName("TestUpdateImage");
         image.setDescription("DescriptionTestUpdateImage");
         image.setCopyright(0L);
-        image.setDate(LocalDateTime.now());
+        image.setDate(LocalDate.now());
         image.setState(0L);
         image.setLink("TestUpdateImage");
 
@@ -99,4 +102,10 @@ class ImageServiceImplTest {
         service.delete(8L);
         assertNull(service.read(6L));
     }
+
+    @Test
+    void addImage(){
+        service.addImage(1L,"test","test", "test",1L,1L, "test.png");
+    }
+
 }

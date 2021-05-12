@@ -6,13 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -30,8 +29,8 @@ public class UserController {
     }
 
     @GetMapping("/identification")
-    public ResponseEntity<User> getUserByEmailAndPassword(@PathParam("identifier") String identifier, @PathParam("password") String password) {
-        User user = service.findUserByIdentifierAndPassword(identifier, password);
+    public ResponseEntity<User> getUserByEmailAndPassword(@PathParam("email") String email, @PathParam("password") String password) {
+        User user = service.findUserByEmailAndPassword(email, password);
         if (user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
@@ -40,9 +39,13 @@ public class UserController {
         }
     }
 
-//    @PostMapping("/save")
-//    public Actor createActor(@RequestBody Actor actor){
-//        return service.create(actor);
-//    }
-
+    @PostMapping("/add")
+    public void addUser(
+            @PathParam("name") String name,
+            @PathParam("surname") String surname,
+            @PathParam("identifier") String identifier,
+            @PathParam("password") String password,
+            @PathParam("email") String email) {
+        service.addUser(name, surname, identifier, password, email);
+    }
 }

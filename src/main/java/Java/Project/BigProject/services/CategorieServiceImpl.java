@@ -1,11 +1,14 @@
 package Java.Project.BigProject.services;
 
 import Java.Project.BigProject.entities.Categorie;
+import Java.Project.BigProject.entities.Image;
+import Java.Project.BigProject.entities.User;
 import Java.Project.BigProject.repositories.CategorieRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -43,5 +46,16 @@ public class CategorieServiceImpl implements  CategorieService{
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public void addCategorie(String name){
+        Categorie categorie = new Categorie();
+
+        categorie.setName(name);
+        create(categorie);
+    }
+
+    public Categorie getOneCategoryByName(String name) {
+        return repository.getByName(name);
     }
 }

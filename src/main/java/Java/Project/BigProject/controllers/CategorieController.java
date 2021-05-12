@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/categories")
 public class CategorieController {
@@ -29,9 +31,10 @@ public class CategorieController {
         return service.read(id);
     }
 
-//    @PostMapping("/save")
-//    public Actor createActor(@RequestBody Actor actor){
-//        return service.create(actor);
-//    }
+    @PostMapping("/add")
+    public void addCategorie(
+            @PathParam("name") String name) {
+        service.addCategorie(name);
+    }
 
 }
